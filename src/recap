@@ -26,7 +26,7 @@
 #~
 
 ## Version
-declare -r _VERSION='2.1.0'
+declare -r _VERSION='2.1.1'
 
 ## Default settings(can *NOT* be overridden in config file)
 declare -r DATE=$( date +%F_%T )
@@ -47,6 +47,7 @@ SNAPSHOT="${default_SNAPSHOT}"
 
 ## Default settings(can be overridden in config file)
 declare -r default_BASEDIR="/var/log/recap"
+declare -r default_BASEDIR_PERMS=0750
 declare -r default_RECAPLOG="${default_BASEDIR}/recap.log"
 declare -r default_MAILTO=""
 declare -r default_MIN_FREE_SPACE=0
@@ -56,6 +57,7 @@ declare -r default_USEPSTREE="no"
 declare -r default_USESLAB="no"
 declare -r default_USEPLUGINS="no"
 BASEDIR="${default_BASEDIR}"
+BASEDIR_PERMS="${default_BASEDIR_PERMS}"
 RECAPLOG="${default_RECAPLOG}"
 MAILTO="${default_MAILTO}"
 MIN_FREE_SPACE=${default_MIN_FREE_SPACE}
@@ -197,7 +199,7 @@ create_output_dirs() {
       mkdir -p "${OUTPUT_DIR}"
     fi
   done
-  chmod 0750 "${BASEDIR}"
+  chmod "${BASEDIR_PERMS}" "${BASEDIR}"
 }
 
 # Create output file
